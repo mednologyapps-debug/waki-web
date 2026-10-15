@@ -1,7 +1,7 @@
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
-const LOGO = 'https://raw.githubusercontent.com/mednologyapps-debug/waki-android/feature/android-map-style-v2/app/src/main/res/drawable/waki_logo_full.png'
+const LOGO = '/waki-logo.png'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
