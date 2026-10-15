@@ -1,129 +1,17 @@
-import {
-  ArrowRight, BadgeCheck, Building2, CheckCircle2, Clock3, Hotel,
-  MapPinned, ShieldCheck, Smartphone, Sparkles, UsersRound
-} from 'lucide-react'
+import { ArrowUpRight, ArrowRight, MapPin, Clock3, ShieldCheck, Check, Search, CreditCard, BedDouble, Building2, CalendarCheck, SlidersHorizontal } from 'lucide-react'
 import Header from '../components/Header'
-import SearchCard from '../components/SearchCard'
 import Footer from '../components/Footer'
-
-export default function HomePage() {
-  return (
-    <>
-      <Header />
-      <main>
-        <section id="inicio" className="hero section">
-          <div className="container hero-grid">
-            <div className="hero-copy">
-              <div className="eyebrow"><Sparkles size={16} /> Reserva diferente</div>
-              <h1>Reserva hoteles por horas,<span> sin tantas vueltas.</span></h1>
-              <p className="hero-lead">Encuentra un hotel cerca de ti, elige cuánto tiempo necesitas y reserva desde WAKI de forma rápida y flexible.</p>
-              <SearchCard />
-              <div className="trust-row">
-                <span><ShieldCheck size={18} /> Reserva segura</span>
-                <span><Clock3 size={18} /> Horarios flexibles</span>
-                <span><MapPinned size={18} /> Hoteles cerca de ti</span>
-              </div>
-            </div>
-
-            <div className="hero-visual" aria-label="Vista previa de WAKI">
-              <div className="hero-orbit orbit-one"></div>
-              <div className="hero-orbit orbit-two"></div>
-              <div className="phone-card">
-                <div className="phone-top"><span className="mini-logo">W</span><span>WAKI</span></div>
-                <div className="phone-content">
-                  <span className="phone-kicker">Cerca de ti</span>
-                  <h3>Hotel Velmar Boutique</h3>
-                  <p>Miraflores · Disponible ahora</p>
-                  <div className="hotel-preview"></div>
-                  <div className="phone-bottom">
-                    <div><small>Desde</small><strong>S/ 60</strong></div>
-                    <button>Ver hotel</button>
-                  </div>
-                </div>
-              </div>
-              <div className="llama-card"><div className="llama-face">🦙</div><strong>Tu tiempo, a tu manera.</strong></div>
-            </div>
-          </div>
-        </section>
-
-        <section id="como-funciona" className="section section-white">
-          <div className="container">
-            <div className="section-heading centered">
-              <span className="section-label">CÓMO FUNCIONA</span>
-              <h2>Reservar con WAKI es simple</h2>
-              <p>Tres pasos y listo.</p>
-            </div>
-            <div className="steps-grid">
-              <article className="step-card"><div className="step-number">01</div><MapPinned size={28} /><h3>Encuentra</h3><p>Busca hoteles disponibles por zona, distrito o cercanía.</p></article>
-              <article className="step-card"><div className="step-number">02</div><Clock3 size={28} /><h3>Elige tus horas</h3><p>Selecciona la duración, fecha y hora que mejor te convengan.</p></article>
-              <article className="step-card"><div className="step-number">03</div><BadgeCheck size={28} /><h3>Reserva</h3><p>Confirma tu reserva y accede a toda la información desde WAKI.</p></article>
-            </div>
-          </div>
-        </section>
-
-        <section id="usuarios" className="section">
-          <div className="container split-grid">
-            <div>
-              <span className="section-label">PARA USUARIOS</span>
-              <h2>Más libertad para reservar.</h2>
-              <p className="section-copy">WAKI está pensado para quienes necesitan flexibilidad, privacidad y una experiencia mucho más simple que una reserva tradicional.</p>
-              <div className="check-list">
-                <span><CheckCircle2 /> Reserva por 2, 4, 6 o más horas.</span>
-                <span><CheckCircle2 /> Consulta disponibilidad antes de llegar.</span>
-                <span><CheckCircle2 /> Administra tus reservas desde la app.</span>
-                <span><CheckCircle2 /> Acumula WAKI Points con tus estadías.</span>
-              </div>
-            </div>
-            <div className="feature-panel">
-              <div className="feature-icon"><Smartphone size={30} /></div>
-              <h3>Todo desde tu celular</h3>
-              <p>Próximas reservas, estadías en curso, tiempo restante, favoritos y beneficios en un solo lugar.</p>
-              <div className="mini-stats">
-                <div><strong>2h+</strong><span>Reservas flexibles</span></div>
-                <div><strong>24/7</strong><span>Consulta disponible</span></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="hoteles" className="section partner-section">
-          <div className="container partner-grid">
-            <div className="partner-copy">
-              <span className="section-label light-label">PARA HOTELES</span>
-              <h2>Convierte horas disponibles en nuevas reservas.</h2>
-              <p>Afiliar tu hotel a WAKI te permitirá ofrecer disponibilidad por horas, administrar reservas y llegar a nuevos huéspedes desde una sola plataforma.</p>
-              <div className="partner-points">
-                <span><Building2 size={20} /> Gestiona habitaciones y tarifas.</span>
-                <span><UsersRound size={20} /> Recibe nuevas reservas.</span>
-                <span><Hotel size={20} /> Controla disponibilidad desde tu portal.</span>
-              </div>
-              <button className="btn btn-light">Asocia tu hotel <ArrowRight size={18} /></button>
-            </div>
-
-            <div className="dashboard-preview">
-              <div className="dashboard-header"><strong>Portal WAKI Hoteles</strong><span>Vista previa</span></div>
-              <div className="dashboard-metrics">
-                <article><span>Reservas hoy</span><strong>18</strong></article>
-                <article><span>Habitaciones</span><strong>24</strong></article>
-                <article><span>Ocupación</span><strong>76%</strong></article>
-              </div>
-              <div className="booking-row"><span className="status-dot"></span><div><strong>WK-9014</strong><small>Estadía en curso · hasta 18:00</small></div><span className="status-pill">Activa</span></div>
-              <div className="booking-row"><span className="status-dot purple"></span><div><strong>WK-8821</strong><small>Próxima reserva · 18:00</small></div><span className="status-pill soft">Confirmada</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section id="descarga" className="section section-white">
-          <div className="container cta-card">
-            <div><span className="section-label">WAKI APP</span><h2>Tu próxima estadía empieza aquí.</h2><p>Estamos construyendo WAKI para Android y próximamente iOS.</p></div>
-            <div className="cta-actions">
-              <button className="store-button"><Smartphone size={24} /><span><small>Próximamente en</small>Android</span></button>
-              <button className="btn btn-primary">Quiero saber más</button>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
-  )
-}
+import PartnerForm from '../components/PartnerForm'
+import { bookingUrl, hotelPortalUrl } from '../config'
+const steps=[{Icon:Search,title:'Busca',text:'Explora el mapa, encuentra tu hotel y revisa las opciones de estadía disponibles.'},{Icon:CreditCard,title:'Paga',text:'Elige tu habitación y tus horas. Revisa el resumen y completa tu reserva.'},{Icon:BedDouble,title:'Disfruta',text:'Llega al hotel con tu confirmación y disfruta ese momento para ti.'}]
+const faqs=[['¿Qué es WAKI?','WAKI es una plataforma para encontrar y reservar hoteles por horas. Tú eliges el hotel y la opción de estadía disponible que mejor se adapte a tu plan.'],['¿Puedo reservar sin descargar la app?','Sí. Entra en “Reservar desde la web” para explorar los hoteles y continuar tu reserva desde el navegador de tu celular o computadora.'],['¿Cuántas horas puedo reservar?','Las opciones dependen de cada hotel y de su disponibilidad. Revisa la duración, el horario y el precio en el detalle antes de confirmar.'],['¿Dónde veo el precio y las condiciones?','Dentro de la plataforma de reservas encontrarás el detalle del hotel y las condiciones de la opción seleccionada. Revísalas antes de pagar.'],['Tengo un hotel, ¿cómo me asocio?','Completa la solicitud de afiliación de esta página. El equipo de WAKI te contactará para conversar sobre tu hotel y los siguientes pasos.']]
+export default function HomePage(){return <><Header/><main id="inicio">
+<section className="hero"><div className="container hero-grid"><div className="hero-copy"><span className="eyebrow"><span/> HOTELES POR HORAS · LIMA</span><h1>Tu tiempo.<br/>Tus reglas.<br/><em>Tu escapada.</em></h1><p>Hay planes que no esperan. Encuentra tu hotel y reserva por horas con WAKI, también desde la web.</p><a className="btn btn-primary" href={bookingUrl}>Encuentra tu hotel <ArrowUpRight size={20}/></a><a className="text-link" href="#como-funciona">Así de fácil funciona <ArrowRight size={17}/></a><div className="hero-note"><Check size={16}/> Sin descargar la app. Desde tu navegador.</div></div><div className="hero-art"><img src="/brand/explore.webp" alt="La llamita de WAKI mostrando el mapa de hoteles en un celular" width="1000" height="1250" fetchpriority="high"/><div className="art-caption"><MapPin size={21}/><div><strong>Tu próximo plan empieza aquí</strong><span>Tú eliges dónde. Tú eliges tus horas.</span></div></div></div></div></section>
+<div className="values-strip"><div className="container"><span><Clock3/>Tu tiempo, a tu manera</span><span><MapPin/>Encuentra tu lugar</span><span><ShieldCheck/>Tu privacidad primero</span><span><BedDouble/>Más momentos para ti</span></div></div>
+<section className="section" id="como-funciona"><div className="container"><div className="section-heading"><span className="section-label">ASÍ DE SIMPLE</span><h2>Busca. Paga. <em>Disfruta.</em></h2><p>Menos vueltas para encontrar hotel. Más tiempo para tu plan.</p></div><div className="steps-grid">{steps.map(({Icon,title,text},i)=><article className="step-card" key={title}><div className="step-top"><Icon size={27}/><span>0{i+1}</span></div><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+<section className="section moments-section" id="momentos"><div className="container split-grid"><div className="editorial-image"><img src="/brand/moment.webp" alt="Tu tiempo, tus reglas: una escapada con WAKI" width="850" height="1063" loading="lazy"/></div><div className="moments-copy"><span className="section-label">UN PLAN MUY TUYO</span><h2>Una pausa.<br/>Una escapadita.<br/><em>Lo que tú quieras.</em></h2><p>No todos los planes duran una noche. WAKI te ayuda a encontrar un espacio para descansar, desconectarte o compartir un momento especial.</p><div className="benefit"><Clock3/><div><h3>Quédate las horas de tu plan</h3><p>Elige entre las opciones que ofrece cada hotel.</p></div></div><div className="benefit"><MapPin/><div><h3>Encuentra el lugar que va contigo</h3><p>Explora hoteles y compara antes de decidir.</p></div></div><a className="text-link" href={bookingUrl}>Vamos a buscar tu hotel <ArrowUpRight size={18}/></a></div></div></section>
+<section className="section"><div className="container web-banner"><div><span className="section-label">WAKI, TAMBIÉN EN LA WEB</span><h2>Tu próxima escapada.<br/>A un clic de aquí.</h2><p>Desde el celular o la compu. Entra, explora y reserva sin instalar nada.</p><a className="btn btn-light" href={bookingUrl}>Reservar desde la web <ArrowUpRight size={20}/></a></div><img src="/brand/time.webp" alt="La llamita WAKI lista para disfrutar su tiempo" loading="lazy" width="420" height="420"/></div></section>
+<section className="section hotel-section" id="hoteles"><div className="container"><div className="split-grid hotel-intro"><div><span className="section-label">HOTELES QUE SE SUMAN AL PLAN</span><h2>Tu hotel.<br/>Nuevos huéspedes.<br/><em>Más posibilidades.</em></h2><p>Haz que las personas encuentren tu hotel cuando buscan una estadía por horas. Súmate a WAKI y gestiona tu oferta desde el portal para hoteles.</p><a className="btn btn-primary" href="#solicitud">Quiero asociar mi hotel <ArrowRight size={18}/></a><a className="text-link" href={hotelPortalUrl}>Ya soy parte de WAKI ↗</a></div><img className="hotel-mascot" src="/brand/hotel.webp" alt="La llamita de WAKI dando la bienvenida a nuevos hoteles" width="600" height="600" loading="lazy"/></div><div className="hotel-benefits">{[[Building2,'Dale visibilidad a tu hotel','Presenta tus habitaciones a personas que buscan reservar por horas.'],[SlidersHorizontal,'Tu oferta, bajo tu control','Administra las habitaciones, los horarios y las tarifas de tu hotel.'],[CalendarCheck,'Tus reservas en un solo lugar','Organiza la operación desde el portal WAKI para hoteles.']].map(([Icon,title,text])=><article key={title}><Icon/><h3>{title}</h3><p>{text}</p></article>)}</div><PartnerForm/></div></section>
+<section className="section" id="preguntas"><div className="container faq-grid"><div><span className="section-label">ANTES DE TU ESCAPADA</span><h2>¿Te quedó<br/><em>alguna duda?</em></h2><p>Te lo contamos sin tantas vueltas.</p></div><div className="faq-list">{faqs.map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></div></section>
+<section className="closing"><div className="container"><span>EL PLAN LO PONES TÚ</span><h2>Nosotros te ayudamos<br/>a encontrar el lugar.</h2><a className="btn btn-light" href={bookingUrl}>Mi próxima escapada <ArrowUpRight size={19}/></a></div></section>
+</main><Footer/></>}

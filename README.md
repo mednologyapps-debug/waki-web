@@ -1,31 +1,21 @@
-# WAKI Web
+# WAKI web
 
-Web pública y base del futuro portal web de WAKI.
+Landing responsive de WAKI con identidad de marca, acceso a reservas web y afiliación de hoteles.
 
-## Stack
-- React
-- Vite
-- CSS
-- Lucide React
+## Desarrollo
 
-## Ejecutar localmente
-
-```bash
-npm install
+```sh
+npm ci
 npm run dev
-```
-
-## Build de producción
-
-```bash
 npm run build
 ```
 
-## Despliegue
-Proyecto preparado para desplegarse desde GitHub en Hostinger como aplicación Node.js/Vite.
+Copia `.env.example` a `.env` y configura los destinos antes de compilar. Las variables `VITE_` son públicas.
 
-## Estructura futura
-- `wakipe.com` → web pública
-- `hotel.wakipe.com` → portal de hoteles
-- `admin.wakipe.com` → panel administrativo
-- Supabase → autenticación, hoteles, habitaciones, reservas, disponibilidad y WAKI Points
+- `VITE_BOOKING_URL`: plataforma existente de reservas (por defecto ventas.wakipe.com).
+- `VITE_HOTEL_PORTAL_URL`: portal existente para hoteles.
+- `VITE_PARTNERSHIP_EMAIL`: correo comercial receptor. Sin dirección el formulario muestra que la recepción aún no está disponible.
+
+El formulario valida los campos y prepara una solicitud mediante `mailto:`. El usuario debe enviarla desde su aplicación de correo; la página no afirma que fue recibida. Para envío directo sin cliente de correo se necesita un backend con proveedor de email, control de abuso y credenciales privadas. No incluye un backend de reservas: los CTA llevan a la plataforma existente.
+
+Assets originales del cliente optimizados en WebP en `public/brand`. Tipografías Poppins e Inter con fallback del sistema. No se publican hoteles, precios, reseñas ni métricas ficticias.
