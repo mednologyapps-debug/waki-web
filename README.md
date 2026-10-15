@@ -22,4 +22,6 @@ Assets originales del cliente optimizados en WebP en `public/brand`. Tipografía
 
 ## Banner y buscador rápido
 
-El buscador envía `district`, `date` y `time` como parámetros de URL a `VITE_BOOKING_URL`. La plataforma receptora debe reconocer estos parámetros para aplicar filtros; esta landing no consulta disponibilidad ni confirma resultados. El banner usa `public/brand/hero-couple-v2.webp`, creado con el generador de imágenes a partir de las referencias WAKI: dos llamitas y un celular con mapa, fondo transparente, sin titulares en la ilustración.
+El buscador envía `district`, `date` y `time` como parámetros de URL a `VITE_BOOKING_URL`. La plataforma receptora debe reconocer estos parámetros para aplicar filtros; esta landing no consulta disponibilidad ni confirma resultados. El banner usa `public/brand/hero-couple-v3.webp`, creado con el generador de imágenes a partir de las referencias WAKI: dos llamitas y un celular con mapa, fondo transparente, sin titulares en la ilustración.
+
+Los iconos de Google Play y Apple del banner son informativos; aún no tienen enlaces de descarga. La versión v3 de la ilustración elimina la maleta de ruedas de la llamita masculina y mantiene el fondo transparente.
