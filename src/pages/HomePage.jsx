@@ -19,7 +19,7 @@ import Header from '../components/Header'
 import SearchCard from '../components/SearchCard'
 import Footer from '../components/Footer'
 
-const LLAMA = 'https://raw.githubusercontent.com/mednologyapps-debug/waki-android/feature/android-map-style-v2/app/src/main/res/drawable/waki_llama.png'
+const LLAMA = '/waki-llama.png'
 
 const benefits = [
   { icon: Clock3, title: 'Tu tiempo', text: 'Elige las horas que realmente necesitas.' },
