@@ -19,3 +19,7 @@ Copia `.env.example` a `.env` y configura los destinos antes de compilar. Las va
 El formulario valida los campos y prepara una solicitud mediante `mailto:`. El usuario debe enviarla desde su aplicación de correo; la página no afirma que fue recibida. Para envío directo sin cliente de correo se necesita un backend con proveedor de email, control de abuso y credenciales privadas. No incluye un backend de reservas: los CTA llevan a la plataforma existente.
 
 Assets originales del cliente optimizados en WebP en `public/brand`. Tipografías Poppins e Inter con fallback del sistema. No se publican hoteles, precios, reseñas ni métricas ficticias.
+
+## Banner y buscador rápido
+
+El buscador envía `district`, `date` y `time` como parámetros de URL a `VITE_BOOKING_URL`. La plataforma receptora debe reconocer estos parámetros para aplicar filtros; esta landing no consulta disponibilidad ni confirma resultados. El banner usa `public/brand/hero-couple-v2.webp`, creado con el generador de imágenes a partir de las referencias WAKI: dos llamitas y un celular con mapa, fondo transparente, sin titulares en la ilustración.
