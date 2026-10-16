@@ -11,5 +11,5 @@ export default function PartnerDialog({open,onClose}){
   document.body.style.overflow='hidden'
   return ()=>{element.close();document.body.style.overflow=previousOverflow}
  },[open])
- return <dialog ref={dialog} className="partner-dialog" aria-labelledby="partner-form-title" onCancel={e=>{e.preventDefault();onClose()}} onClick={e=>{if(e.target===e.currentTarget)onClose()}}><div className="partner-dialog-content"><button className="dialog-close" type="button" aria-label="Cerrar formulario" onClick={onClose}><X size={22}/></button><PartnerForm/></div></dialog>
+ return <dialog ref={dialog} className="partner-dialog" aria-labelledby="partner-form-title" onCancel={e=>{e.preventDefault();onClose()}} onClick={e=>{if(e.target===e.currentTarget)onClose()}}><div className="partner-dialog-shell"><span className="partner-dialog-mascot" aria-hidden="true"><img src="/brand/llama-peek.webp" alt="" width="134" height="140"/></span><div className="partner-dialog-content"><button className="dialog-close" type="button" aria-label="Cerrar formulario" onClick={onClose}><X size={22}/></button><PartnerForm/></div></div></dialog>
 }
