@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer'
 import { rateLimit } from 'express-rate-limit'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import { partnerConfirmation } from './email/partner-confirmation.js'
 
 export function createApp({ env = process.env, sendMail } = {}) {
  const app = express()
@@ -23,7 +24,16 @@ export function createApp({ env = process.env, sendMail } = {}) {
    if (!sendMail && !transporter) transporter = nodemailer.createTransport({ host: env.SMTP_HOST, port: Number(env.SMTP_PORT || 465), secure: env.SMTP_SECURE !== 'false', auth: { user: env.SMTP_USER, pass: env.SMTP_PASS }, connectionTimeout: 10000, greetingTimeout: 10000, socketTimeout: 20000 })
    const result = await (sendMail || transporter.sendMail.bind(transporter))({ from: { name: 'WAKI — Afiliaciones', address: env.SMTP_USER }, to: env.MAIL_TO, replyTo: data.Correo.trim(), subject: `Solicitud de afiliación WAKI — ${data.Hotel.trim()}`, text: fields.map(key => `${key}: ${data[key].trim()}`).join('\n') + '\nAutorización de contacto: Sí' })
    if (result.accepted && !result.accepted.length) throw new Error('Recipient rejected')
-   res.json({ ok: true })
+   // A failed acknowledgement must not ask the hotel to submit the same application again.
+   let confirmationSent = false
+   try {
+    const confirmation = await (sendMail || transporter.sendMail.bind(transporter))(partnerConfirmation(data, env.SMTP_USER))
+    if (confirmation.accepted && !confirmation.accepted.length) throw new Error('Recipient rejected')
+    confirmationSent = true
+   } catch (error) {
+    console.error('Partner confirmation failed:', error.code || 'SEND_FAILED')
+   }
+   res.json({ ok: true, confirmationSent })
   } catch (error) {
    console.error('Partner email failed:', error.code || 'SEND_FAILED')
    res.status(502).json({ message: 'No pudimos enviar tu solicitud. Inténtalo nuevamente o escríbenos a hola@wakipe.com.' })
