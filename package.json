@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "node server.js",
-    "dev:server": "node --env-file-if-exists=.env server.js"
+    "dev:server": "node --env-file-if-exists=.env server.js",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
