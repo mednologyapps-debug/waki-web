@@ -25,3 +25,13 @@ Assets originales del cliente optimizados en WebP en `public/brand`. Tipografía
 El buscador envía `district`, `date` y `time` como parámetros de URL a `VITE_BOOKING_URL`. La plataforma receptora debe reconocer estos parámetros para aplicar filtros; esta landing no consulta disponibilidad ni confirma resultados. El banner usa `public/brand/hero-couple-v3.webp`, creado con el generador de imágenes a partir de las referencias WAKI: dos llamitas y un celular con mapa, fondo transparente, sin titulares en la ilustración.
 
 Los iconos de Google Play y Apple del banner son informativos; aún no tienen enlaces de descarga. La versión v3 de la ilustración elimina la maleta de ruedas de la llamita masculina y mantiene el fondo transparente.
+
+## Envío de solicitudes de hoteles
+
+El formulario usa `POST /api/partner-request`. El servidor Express sirve `dist` y envía por SMTP con Nodemailer. Las credenciales solo se leen en el servidor. Configurar SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS y MAIL_TO en Hostinger (ver .env.example). Nunca subir contraseñas a GitHub.
+
+Hostinger: seleccionar framework **Express**, Node 22, build `npm run build`, archivo de entrada `server.js` y start `npm start`. No publicar únicamente `dist` como sitio Vite: el endpoint necesita el proceso Node. Usar la rama que contiene estos cambios. Guardar variables y desplegar nuevamente.
+
+Local: `npm install`, crear .env con valores privados, ejecutar `npm run dev:server` y en otra terminal `npm run dev`. El proxy Vite reenvía /api al puerto 3000. Producción local: `npm run build` y `npm run dev:server`.
+
+Se limitan los envíos a cinco por IP/hora por proceso, se valida el contenido y se usa un campo trampa. El límite en memoria se reinicia con el proceso. Una respuesta correcta indica aceptación SMTP, no garantiza llegada a la bandeja; comprobar también spam.
