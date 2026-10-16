@@ -36,4 +36,4 @@ export function createApp({ env = process.env, sendMail } = {}) {
  app.use((error, _req, res, _next) => res.status(error.status === 413 ? 413 : 400).json({ message: 'Solicitud no válida.' }))
  return app
 }
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) createApp().listen(Number(process.env.PORT || 3000), '0.0.0.0')
+createApp().listen(Number(process.env.PORT || 3000), '0.0.0.0')
