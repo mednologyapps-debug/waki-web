@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Libro de Reclamaciones Virtual de WAKI, operado por Mednology Apps.">
+<title>Libro de Reclamaciones | WAKI</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#26232a;background:#fcf8ff;--p:#7137e8;--ink:#26232a;--muted:#706a78;--line:#ebe5f1;--soft:#f1e9ff}
+*{box-sizing:border-box}body{margin:0}header{background:#fff;border-bottom:1px solid var(--line)}header .inner{max-width:900px;margin:auto;padding:16px 24px;display:flex;justify-content:space-between}a{color:var(--p)}main{max-width:900px;margin:32px auto;padding:0 20px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;margin:18px 0}.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--p);font-weight:800}h1{margin:8px 0;font-size:36px}p{line-height:1.6;color:#514b59}.notice{background:#f1e9ff;padding:14px;border-radius:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:block;font-size:14px;font-weight:700;color:#403a46}input,select,textarea{display:block;width:100%;margin-top:6px;padding:12px;border:1px solid #cfc6d8;border-radius:10px;font:inherit;color:var(--ink);background:white}textarea{min-height:120px;resize:vertical}.full{grid-column:1/-1}.required{color:#a32542}.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.button{border:0;border-radius:12px;background:var(--p);color:#fff;font-weight:800;padding:13px 18px;font:inherit;cursor:pointer}.button:disabled{opacity:.6}.status{padding:14px;border-radius:12px;margin-top:16px}.error{background:#fff1f1;color:#8b1e2d}.success{background:#eef9ef;color:#24512c}.hidden{display:none}.small{font-size:13px;color:var(--muted)}@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}h1{font-size:30px}.card{padding:20px}}
+</style>
+</head>
+<body>
+<header><div class="inner"><strong>WAKI</strong><a href="/legal.html#contact">Información legal</a></div></header>
+<main>
+<div class="eyebrow">Libro de Reclamaciones Virtual</div>
+<h1>Cuéntanos qué ocurrió.</h1>
+<p>Este libro pertenece a Mednology Apps (RUC 20608764161), operadora de WAKI. Recibirás una constancia con un código de registro al enviar el formulario. WAKI responderá en un plazo máximo de 15 días hábiles.</p>
+<p class="notice">Un <strong>reclamo</strong> expresa disconformidad con un producto o servicio. Una <strong>queja</strong> expresa disconformidad con la atención o el proceso. Presentarlo no limita otros derechos que te reconoce la ley.</p>
+<form id="complaint" class="card">
+<h2>Datos de la persona consumidora</h2>
+<div class="grid">
+<label>Tipo de registro <span class="required">*</span><select name="classification" required><option value="">Selecciona</option><option value="reclamo">Reclamo</option><option value="queja">Queja</option></select></label>
+<label>Persona <span class="required">*</span><select name="consumer_type" required><option value="natural">Natural</option><option value="juridica">Jurídica</option></select></label>
+<label>Nombre o razón social <span class="required">*</span><input name="consumer_name" autocomplete="name" maxlength="160" required></label>
+<label>Documento <span class="required">*</span><select name="document_type" required><option value="DNI">DNI</option><option value="CE">Carné de extranjería</option><option value="RUC">RUC</option><option value="PASAPORTE">Pasaporte</option><option value="OTRO">Otro</option></select></label>
+<label>Número de documento <span class="required">*</span><input name="document_number" maxlength="30" required></label>
+<label>Dirección <span class="required">*</span><input name="address" autocomplete="street-address" maxlength="240" required></label>
+<label>Correo electrónico <span class="required">*</span><input type="email" name="email" autocomplete="email" maxlength="254" required></label>
+<label>Teléfono <span class="required">*</span><input type="tel" name="phone" autocomplete="tel" maxlength="40" required></label>
+<label>Si la persona consumidora es menor: nombre del padre, madre o representante<input name="minor_name" maxlength="160"></label>
+<label>Documento del representante<input name="minor_document" maxlength="30"></label>
+<h2 class="full">Información del producto o servicio</h2>
+<label class="full">Producto o servicio <span class="required">*</span><input name="product_service" maxlength="240" required placeholder="Ej.: reserva de hotel, pago o atención de soporte"></label>
+<label>Código de reserva, si aplica<input name="booking_code" maxlength="40"></label>
+<label>Monto reclamado en soles, si aplica<input name="amount" type="number" min="0" step="0.01"></label>
+<label class="full">Describe los hechos <span class="required">*</span><textarea name="description" maxlength="4000" required></textarea></label>
+<label class="full">¿Qué solución solicitas? <span class="required">*</span><textarea name="consumer_request" maxlength="2000" required></textarea></label>
+<label class="hidden" aria-hidden="true">Dejar vacío<input name="website" tabindex="-1" autocomplete="off"></label>
+<div class="full actions"><button id="submit" class="button" type="submit">Enviar y generar constancia</button><span class="small">Los campos con * son obligatorios. No ingreses datos de tarjetas ni códigos de seguridad.</span></div>
+</div>
+<div id="status" class="status hidden" role="status" aria-live="polite"></div>
+<div id="receipt" class="hidden">
+<h2>Constancia de presentación</h2>
+<p>Guarda o imprime esta constancia. Código: <strong id="receipt-code"></strong></p>
+<p id="receipt-date"></p>
+<pre id="receipt-copy" style="white-space:pre-wrap;font:inherit"></pre>
+<button class="button" type="button" onclick="window.print()">Imprimir / guardar PDF</button>
+</div>
+</form>
+<p class="small">Tratamos la información para registrar, gestionar y responder el reclamo o queja y cumplir obligaciones legales. Consulta <a href="/legal.html#privacy">la política de privacidad</a>. Contacto: <a href="mailto:reclamos@wakipe.com">reclamos@wakipe.com</a>.</p>
+</main>
+<script type="module">
+const endpoint = "https://ipakrrcjrpfcnjvtwhvp.supabase.co/functions/v1/consumer-complaints";
+const form = document.querySelector("#complaint");
+const button = document.querySelector("#submit");
+const statusBox = document.querySelector("#status");
+const receipt = document.querySelector("#receipt");
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  statusBox.className = "status hidden";
+  button.disabled = true;
+  button.textContent = "Enviando…";
+  const body = Object.fromEntries(new FormData(form));
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || "No se pudo enviar. Intenta nuevamente.");
+    document.querySelector("#receipt-code").textContent = result.receipt_code;
+    document.querySelector("#receipt-date").textContent = "Fecha de registro: " + new Date(result.received_at).toLocaleString("es-PE", { timeZone: "America/Lima" });
+    const copy = result.copy;
+    document.querySelector("#receipt-copy").textContent =
+      "Constancia WAKI · " + result.receipt_code + "\\n" +
+      "Tipo: " + copy.classification + "\\n" +
+      "Nombre: " + copy.consumer_name + "\\n" +
+      "Documento: " + copy.document_type + " " + copy.document_number + "\\n" +
+      "Correo: " + copy.email + "\\n" +
+      "Servicio: " + copy.product_service + "\\n" +
+      "Descripción: " + copy.description + "\\n" +
+      "Solicitud: " + copy.consumer_request;
+    receipt.classList.remove("hidden");
+    statusBox.textContent = "Tu registro fue recibido. Conserva el código y la constancia.";
+    statusBox.className = "status success";
+  } catch (error) {
+    statusBox.textContent = error.message || "No se pudo enviar. Intenta nuevamente o escribe a reclamos@wakipe.com.";
+    statusBox.className = "status error";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Enviar y generar constancia";
+  }
+});
+</script>
+</body>
+</html>
