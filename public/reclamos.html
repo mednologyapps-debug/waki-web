@@ -64,7 +64,7 @@ form.addEventListener("submit", async (event) => {
   try {
     const response = await fetch(endpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "apikey": "sb_publishable_foN1DcV6ZvwM21hcrv6uGw_B12PC99o" },
       body: JSON.stringify(body)
     });
     const result = await response.json();
