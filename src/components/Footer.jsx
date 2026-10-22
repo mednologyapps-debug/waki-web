@@ -17,12 +17,15 @@ export default function Footer() {
         </div>
         <div>
           <h4>Legal</h4>
-          <span>Términos y condiciones</span>
-          <span>Privacidad</span>
+          <a href="/legal.html#terms">Términos y condiciones</a>
+          <a href="/legal.html#privacy">Privacidad y datos</a>
+          <a href="/legal.html#cancellations">Cancelaciones y reembolsos</a>
+          <a href="/legal.html#contact">Reclamos</a>
         </div>
         <div>
           <h4>Contacto</h4>
-          <span>Próximamente</span>
+          <a href="mailto:soporte@wakipe.com">soporte@wakipe.com</a>
+          <a href="mailto:reclamos@wakipe.com">reclamos@wakipe.com</a>
           <span>Lima, Perú</span>
         </div>
       </div>
