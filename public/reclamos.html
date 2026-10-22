@@ -78,7 +78,13 @@ form.addEventListener("submit", async (event) => {
       "Nombre: " + copy.consumer_name + "\\n" +
       "Documento: " + copy.document_type + " " + copy.document_number + "\\n" +
       "Correo: " + copy.email + "\\n" +
+      "Teléfono: " + copy.phone + "\\n" +
+      "Dirección: " + copy.address + "\\n" +
+      "Representante: " + (copy.minor_name || "—") + "\\n" +
+      "Documento del representante: " + (copy.minor_document || "—") + "\\n" +
       "Servicio: " + copy.product_service + "\\n" +
+      "Reserva: " + (copy.booking_code || "—") + "\\n" +
+      "Monto: " + (copy.amount == null ? "—" : "S/ " + copy.amount) + "\\n" +
       "Descripción: " + copy.description + "\\n" +
       "Solicitud: " + copy.consumer_request;
     receipt.classList.remove("hidden");
