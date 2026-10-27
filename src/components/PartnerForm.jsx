@@ -1,3 +1,4 @@
+import {track} from '../analytics'
 import { useState } from 'react'
 import { Mail } from 'lucide-react'
 
@@ -12,7 +13,7 @@ export default function PartnerForm(){
    const response=await fetch('/api/partner-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
    const result=await response.json()
    if(!response.ok)throw new Error(result.message||'No pudimos enviar tu solicitud. Inténtalo nuevamente.')
-   setMessage(result.confirmationSent?'¡Recibimos tu solicitud! Te enviamos una confirmación por correo. Si no la ves, revisa spam.':'¡Recibimos tu solicitud! El equipo de WAKI se pondrá en contacto contigo.');form.reset()
+   track('partner_submitted');setMessage(result.confirmationSent?'¡Recibimos tu solicitud! Te enviamos una confirmación por correo. Si no la ves, revisa spam.':'¡Recibimos tu solicitud! El equipo de WAKI se pondrá en contacto contigo.');form.reset()
   }catch(error){setMessage(error instanceof SyntaxError?'No pudimos conectar con el servicio de envío. Inténtalo nuevamente.':error.message)}
   finally{setSending(false)}
  }

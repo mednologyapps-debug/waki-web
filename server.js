@@ -8,6 +8,8 @@ import { partnerConfirmation } from './email/partner-confirmation.js'
 export function createApp({ env = process.env, sendMail } = {}) {
  const app = express()
  app.disable('x-powered-by')
+ app.use((_req,res,next)=>{res.set({'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','X-Frame-Options':'DENY','Permissions-Policy':'camera=(), microphone=()'});next()})
+ app.get('/api/health',(_req,res)=>res.set('Cache-Control','no-store').json({ok:true,service:'waki-web'}))
  // Hostinger terminates requests at its reverse proxy.
  app.set('trust proxy', 1)
  app.use(express.json({ limit: '8kb' }))
@@ -39,6 +41,19 @@ export function createApp({ env = process.env, sendMail } = {}) {
    res.status(502).json({ message: 'No pudimos enviar tu solicitud. Inténtalo nuevamente o escríbenos a hola@wakipe.com.' })
   }
  })
+ app.post('/api/account-deletion-request', limiter, async (req,res)=>{
+  const data=req.body||{};
+  if(req.get('origin') && new URL(req.get('origin')).host!==req.get('host'))return res.status(403).json({message:'Origen no permitido.'});
+  if(data.website)return res.json({ok:true,message:'Solicitud recibida.'});
+  if(typeof data.email!=='string'||data.email.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)||/[\r\n]/.test(data.email)||data.confirmed!==true)return res.status(400).json({message:'Revisa tu correo y confirma la solicitud.'});
+  if(!sendMail && ['SMTP_HOST','SMTP_USER','SMTP_PASS','MAIL_TO'].some(key=>!env[key]))return res.status(503).json({message:'Escríbenos a hola@wakipe.com para solicitar la eliminación.'});
+  try{
+   if(!sendMail&&!transporter)transporter=nodemailer.createTransport({host:env.SMTP_HOST,port:Number(env.SMTP_PORT||465),secure:env.SMTP_SECURE!=='false',auth:{user:env.SMTP_USER,pass:env.SMTP_PASS},connectionTimeout:10000,greetingTimeout:10000,socketTimeout:20000});
+   const result=await (sendMail||transporter.sendMail.bind(transporter))({from:{name:'WAKI — Privacidad',address:env.SMTP_USER},to:env.MAIL_TO,replyTo:data.email.trim(),subject:'WAKI · Solicitud de eliminación de cuenta',text:'Solicitud recibida desde la página pública de WAKI.\nCorreo de la cuenta: '+data.email.trim()+'\nVerificar la identidad antes de eliminar. Esta solicitud no acredita acceso a la cuenta ni debe ejecutar una devolución automática.'});
+   if(result.accepted&&!result.accepted.length)throw new Error('REJECTED');
+   return res.json({ok:true,message:'Recibimos tu solicitud. El equipo verificará tu identidad antes de eliminar la cuenta. No necesitas enviarla nuevamente.'});
+  }catch{console.error('DELETION_REQUEST_MAIL_FAILED');return res.status(502).json({message:'No pudimos enviar tu solicitud. Escríbenos a hola@wakipe.com.'})}
+ });
  app.use('/api', (_req, res) => res.status(404).json({ message: 'Ruta no encontrada.' }))
  const dist = fileURLToPath(new URL('./dist', import.meta.url))
  app.use(express.static(dist))
@@ -46,4 +61,4 @@ export function createApp({ env = process.env, sendMail } = {}) {
  app.use((error, _req, res, _next) => res.status(error.status === 413 ? 413 : 400).json({ message: 'Solicitud no válida.' }))
  return app
 }
-createApp().listen(Number(process.env.PORT || 3000), '0.0.0.0')
+if(process.env.NODE_ENV!=='test')createApp().listen(Number(process.env.PORT || 3000), '0.0.0.0')
