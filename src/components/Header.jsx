@@ -1,41 +1,12 @@
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
-
-export default function Header() {
-  const [open, setOpen] = useState(false)
-
-  const goTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    setOpen(false)
-  }
-
-  return (
-    <header className="site-header">
-      <div className="container header-inner">
-        <button className="brand" onClick={() => goTo('inicio')} aria-label="Ir al inicio">
-          <span className="brand-mark">W</span>
-          <span>WAKI</span>
-        </button>
-
-        <nav className={`main-nav ${open ? 'open' : ''}`}>
-          <button onClick={() => goTo('como-funciona')}>Cómo funciona</button>
-          <button onClick={() => goTo('usuarios')}>Para usuarios</button>
-          <button onClick={() => goTo('hoteles')}>Para hoteles</button>
-          <button onClick={() => goTo('contacto')}>Contacto</button>
-          <button className="btn btn-primary mobile-only" onClick={() => goTo('hoteles')}>
-            Asocia tu hotel
-          </button>
-        </nav>
-
-        <div className="header-actions">
-          <button className="btn btn-soft" onClick={() => goTo('descarga')}>Descargar app</button>
-          <button className="btn btn-primary" onClick={() => goTo('hoteles')}>Asocia tu hotel</button>
-        </div>
-
-        <button className="menu-toggle" onClick={() => setOpen(!open)} aria-label={open ? 'Cerrar menú' : 'Abrir menú'}>
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-    </header>
-  )
+export default function Header({onRegister}) {
+ const [open,setOpen]=useState(false)
+ return <header className="site-header"><div className="container header-inner">
+ <a href="#inicio" className="brand" aria-label="WAKI, inicio"><img src="/brand/logo.webp" alt="WAKI" width="150" height="72" /></a>
+ <nav id="mobile-navigation" aria-label="Navegación principal" className={open?'main-nav open':'main-nav'} onClick={()=>setOpen(false)}>
+ <a href="#como-funciona">Cómo funciona</a><a href="#hoteles">Para hoteles</a><a href="#preguntas">Preguntas</a></nav>
+ <button className="btn btn-primary header-cta" type="button" onClick={()=>{setOpen(false);onRegister()}}>Registra tu hotel</button>
+ <button className="menu-toggle" aria-label={open?'Cerrar menú':'Abrir menú'} aria-expanded={open} aria-controls="mobile-navigation" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>
+ </div></header>
 }
