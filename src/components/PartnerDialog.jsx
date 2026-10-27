@@ -1,10 +1,13 @@
+import {track} from '../analytics'
 import { useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 import PartnerForm from './PartnerForm'
 export default function PartnerDialog({open,onClose}){
  const dialog=useRef(null)
+ const measured=useRef(false)
  useEffect(()=>{
-  if(!open)return
+  if(!open){measured.current=false;return}
+  if(!measured.current){track('partner_open');measured.current=true}
   const element=dialog.current
   const previousOverflow=document.body.style.overflow
   element.showModal()
